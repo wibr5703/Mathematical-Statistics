@@ -1,0 +1,531 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Project 2}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{}PROBLEM 1}
+        
+        p1 \PY{o}{=} \PY{k+kt}{c}\PY{p}{(}\PY{l+m}{4}\PY{p}{,}\PY{l+m}{6}\PY{p}{,}\PY{l+m}{4}\PY{p}{,}\PY{l+m}{4}\PY{p}{,}\PY{l+m}{1}\PY{p}{,}\PY{l+m}{6}\PY{p}{,}\PY{l+m}{4}\PY{p}{,}\PY{l+m}{6}\PY{p}{,}\PY{l+m}{3}\PY{p}{,}\PY{l+m}{5}\PY{p}{,}\PY{l+m}{5}\PY{p}{,}\PY{l+m}{6}\PY{p}{,}\PY{l+m}{7}\PY{p}{,}\PY{l+m}{7}\PY{p}{,}\PY{l+m}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k+kp}{mean}\PY{p}{(}p1\PY{p}{)}
+\end{Verbatim}
+
+
+    4.6
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}99}]:} \PY{c+c1}{\PYZsh{}PROBLEM 2}
+         
+         p2 \PY{o}{=} \PY{k+kt}{c}\PY{p}{(}\PY{l+m}{5.3}\PY{p}{,}\PY{l+m}{5.6}\PY{p}{,}\PY{l+m}{7.6}\PY{p}{,}\PY{l+m}{6.8}\PY{p}{,}\PY{l+m}{4.8}\PY{p}{,}\PY{l+m}{5.7}\PY{p}{,}\PY{l+m}{9.0}\PY{p}{,}\PY{l+m}{6.0}\PY{p}{,}\PY{l+m}{4.9}\PY{p}{,}\PY{l+m}{8.4}\PY{p}{,}\PY{l+m}{6.5}\PY{p}{,}\PY{l+m}{7.9}\PY{p}{,}\PY{l+m}{6.8}\PY{p}{,}\PY{l+m}{4.3}\PY{p}{,}\PY{l+m}{8.5}\PY{p}{,}\PY{l+m}{3.6}\PY{p}{,}\PY{l+m}{6.1}\PY{p}{,}\PY{l+m}{5.8}\PY{p}{,}\PY{l+m}{6.4}\PY{p}{,}\PY{l+m}{4.0}\PY{p}{)}
+         
+         p2\PYZus{}sampleMean \PY{o}{=} \PY{k+kp}{mean}\PY{p}{(}p2\PY{p}{)}
+         p2\PYZus{}length \PY{o}{=} \PY{k+kp}{length}\PY{p}{(}p2\PY{p}{)}
+         p2\PYZus{}t\PYZus{}value \PY{o}{=} qt\PY{p}{(}\PY{l+m}{0.03}\PY{o}{/}\PY{l+m}{2}\PY{p}{,} p2\PYZus{}length\PY{l+m}{\PYZhy{}1}\PY{p}{,} lower.tail \PY{o}{=} \PY{k+kc}{FALSE}\PY{p}{,} log.p \PY{o}{=} \PY{k+kc}{FALSE}\PY{p}{)}
+         p2\PYZus{}sd \PY{o}{=} sd\PY{p}{(}p2\PY{p}{)}
+         
+         p2\PYZus{}E \PY{o}{=} p2\PYZus{}t\PYZus{}value\PY{o}{*}p2\PYZus{}sd\PY{o}{/}\PY{k+kp}{sqrt}\PY{p}{(}p2\PYZus{}length\PY{p}{)}
+         
+         p2\PYZus{}sd
+\end{Verbatim}
+
+
+    1.52453616759846
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} p2\PYZus{}sampleMean\PY{o}{\PYZhy{}}\PY{p}{(}p2\PYZus{}t\PYZus{}value\PY{o}{*}p2\PYZus{}sd\PY{o}{/}\PY{k+kp}{sqrt}\PY{p}{(}p2\PYZus{}length\PY{p}{)}\PY{p}{)}
+        p2\PYZus{}sampleMean\PY{o}{+}\PY{p}{(}p2\PYZus{}t\PYZus{}value\PY{o}{*}p2\PYZus{}sd\PY{o}{/}\PY{k+kp}{sqrt}\PY{p}{(}p2\PYZus{}length\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    5.40037661257665
+
+    
+    6.99962338742335
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{}PROBLEM 3(A)}
+        
+        p3\PYZus{}xbar\PYZus{}1 \PY{o}{=} \PY{l+m}{53.8}
+        p3\PYZus{}n\PYZus{}1 \PY{o}{=} \PY{l+m}{400}
+        p3\PYZus{}s\PYZus{}1 \PY{o}{=} \PY{l+m}{2.4}
+        
+        p3\PYZus{}xbar\PYZus{}2 \PY{o}{=} \PY{l+m}{54.5}
+        p3\PYZus{}n\PYZus{}2 \PY{o}{=} \PY{l+m}{500}
+        p3\PYZus{}s\PYZus{}2 \PY{o}{=} \PY{l+m}{2.5}
+        
+        
+        p3\PYZus{}z \PY{o}{=} \PY{p}{(}\PY{p}{(}p3\PYZus{}xbar\PYZus{}1\PY{o}{\PYZhy{}}p3\PYZus{}xbar\PYZus{}2\PY{p}{)}\PY{o}{\PYZhy{}}\PY{p}{(}\PY{l+m}{\PYZhy{}0.3}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{k+kp}{sqrt}\PY{p}{(}\PY{p}{(}\PY{l+m}{2.4}\PY{o}{\PYZca{}}\PY{l+m}{2}\PY{o}{/}\PY{l+m}{400}\PY{p}{)}\PY{o}{+}\PY{p}{(}\PY{l+m}{2.5}\PY{o}{\PYZca{}}\PY{l+m}{2}\PY{o}{/}\PY{l+m}{500}\PY{p}{)}\PY{p}{)}
+        
+        p3\PYZus{}z
+        
+        qnorm\PY{p}{(}\PY{l+m}{0.02}\PY{p}{,}mean\PY{o}{=}\PY{l+m}{0}\PY{p}{,}sd\PY{o}{=}\PY{l+m}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    -2.43884304339879
+
+    
+    -2.05374891063182
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{}PROBLEM 3(B)}
+         
+         p3\PYZus{}z\PYZus{}partb \PY{o}{=} \PY{p}{(}\PY{p}{(}p3\PYZus{}xbar\PYZus{}1\PY{o}{\PYZhy{}}p3\PYZus{}xbar\PYZus{}2\PY{p}{)}\PY{o}{\PYZhy{}}\PY{p}{(}\PY{l+m}{\PYZhy{}0.4}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{k+kp}{sqrt}\PY{p}{(}\PY{p}{(}\PY{l+m}{2.4}\PY{o}{\PYZca{}}\PY{l+m}{2}\PY{o}{/}\PY{l+m}{400}\PY{p}{)}\PY{o}{+}\PY{p}{(}\PY{l+m}{2.5}\PY{o}{\PYZca{}}\PY{l+m}{2}\PY{o}{/}\PY{l+m}{500}\PY{p}{)}\PY{p}{)}
+         
+         p3\PYZus{}z\PYZus{}partb
+         
+         qnorm\PY{p}{(}\PY{l+m}{0.02}\PY{p}{,}mean\PY{o}{=}\PY{l+m}{0}\PY{p}{,}sd\PY{o}{=}\PY{l+m}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    -1.82913228254909
+
+    
+    -2.05374891063182
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}120}]:} \PY{c+c1}{\PYZsh{}PROBLEM 3(C)}
+          
+          p3\PYZus{}p\PYZus{}score \PY{o}{=} pnorm\PY{p}{(}p3\PYZus{}z\PYZus{}partb\PY{p}{,} mean \PY{o}{=} \PY{l+m}{0}\PY{p}{,} sd \PY{o}{=} \PY{l+m}{1}\PY{p}{,} lower.tail \PY{o}{=} \PY{k+kc}{TRUE}\PY{p}{,} log.p \PY{o}{=} \PY{k+kc}{FALSE}\PY{p}{)}
+          p3\PYZus{}p\PYZus{}score
+\end{Verbatim}
+
+
+    0.0336898969384112
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}118}]:} \PY{c+c1}{\PYZsh{}PROBLEM 3(D)(1)}
+          
+          p3\PYZus{}zalpha\PYZus{}partd1 \PY{o}{=} qnorm\PY{p}{(}\PY{l+m}{0.02}\PY{p}{,}mean\PY{o}{=}\PY{l+m}{0}\PY{p}{,}sd\PY{o}{=}\PY{l+m}{1}\PY{p}{)}
+          p3\PYZus{}k\PYZus{}partd1 \PY{o}{=} \PY{l+m}{\PYZhy{}0.30}\PY{o}{+}p3\PYZus{}zalpha\PYZus{}partd\PY{o}{*}\PY{k+kp}{sqrt}\PY{p}{(}\PY{p}{(}\PY{l+m}{2.4}\PY{o}{\PYZca{}}\PY{l+m}{2}\PY{o}{/}\PY{l+m}{400}\PY{p}{)}\PY{o}{+}\PY{p}{(}\PY{l+m}{2.5}\PY{o}{\PYZca{}}\PY{l+m}{2}\PY{o}{/}\PY{l+m}{500}\PY{p}{)}\PY{p}{)}
+          p3\PYZus{}K\PYZus{}partd1 \PY{o}{=} \PY{p}{(}p3\PYZus{}k\PYZus{}partd\PY{o}{\PYZhy{}}\PY{p}{(}\PY{l+m}{\PYZhy{}0.28}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{k+kp}{sqrt}\PY{p}{(}\PY{p}{(}\PY{l+m}{2.4}\PY{o}{\PYZca{}}\PY{l+m}{2}\PY{o}{/}\PY{l+m}{400}\PY{p}{)}\PY{o}{+}\PY{p}{(}\PY{l+m}{2.5}\PY{o}{\PYZca{}}\PY{l+m}{2}\PY{o}{/}\PY{l+m}{500}\PY{p}{)}\PY{p}{)}
+          P3\PYZus{}beta\PYZus{}partd1 \PY{o}{=} \PY{l+m}{1}\PY{o}{\PYZhy{}}pnorm\PY{p}{(}p3\PYZus{}K\PYZus{}partd1\PY{p}{,} mean \PY{o}{=} \PY{l+m}{0}\PY{p}{,} sd \PY{o}{=} \PY{l+m}{1}\PY{p}{,} lower.tail \PY{o}{=} \PY{k+kc}{TRUE}\PY{p}{,} log.p \PY{o}{=} \PY{k+kc}{FALSE}\PY{p}{)}
+          
+          sigma \PY{o}{=} \PY{k+kp}{sqrt}\PY{p}{(}\PY{p}{(}\PY{l+m}{2.4}\PY{o}{\PYZca{}}\PY{l+m}{2}\PY{o}{/}\PY{l+m}{400}\PY{p}{)}\PY{o}{+}\PY{p}{(}\PY{l+m}{2.5}\PY{o}{\PYZca{}}\PY{l+m}{2}\PY{o}{/}\PY{l+m}{500}\PY{p}{)}\PY{p}{)}
+          intersection \PY{o}{=} \PY{l+m}{\PYZhy{}0.29}
+          k \PY{o}{=} p3\PYZus{}k\PYZus{}partd1
+          integrand0 \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kr}{function}\PY{p}{(}x\PY{p}{)} \PY{p}{\PYZob{}}\PY{p}{(}\PY{l+m}{1}\PY{o}{/}\PY{p}{(}sigma\PY{o}{*}\PY{k+kp}{sqrt}\PY{p}{(}\PY{l+m}{2}\PY{o}{*}\PY{k+kc}{pi}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{k+kp}{exp}\PY{p}{(}\PY{l+m}{\PYZhy{}1}\PY{o}{/}\PY{l+m}{2}\PY{o}{*}\PY{p}{(}\PY{p}{(}x\PY{l+m}{+0.3}\PY{p}{)}\PY{o}{/}sigma\PY{p}{)}\PY{o}{\PYZca{}}\PY{l+m}{2}\PY{p}{)}\PY{p}{\PYZcb{}}
+          integrand1 \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kr}{function}\PY{p}{(}x\PY{p}{)} \PY{p}{\PYZob{}}\PY{p}{(}\PY{l+m}{1}\PY{o}{/}\PY{p}{(}sigma\PY{o}{*}\PY{k+kp}{sqrt}\PY{p}{(}\PY{l+m}{2}\PY{o}{*}\PY{k+kc}{pi}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{k+kp}{exp}\PY{p}{(}\PY{l+m}{\PYZhy{}1}\PY{o}{/}\PY{l+m}{2}\PY{o}{*}\PY{p}{(}\PY{p}{(}x\PY{l+m}{+0.28}\PY{p}{)}\PY{o}{/}sigma\PY{p}{)}\PY{o}{\PYZca{}}\PY{l+m}{2}\PY{p}{)}\PY{p}{\PYZcb{}}
+          
+          a\PY{o}{=}integrate\PY{p}{(}integrand0\PY{p}{,} lower \PY{o}{=} intersection\PY{p}{,} upper \PY{o}{=} \PY{k+kc}{Inf}\PY{p}{,} subdivisions \PY{o}{=} \PY{l+m}{200L}\PY{p}{)}
+          b\PY{o}{=}integrate\PY{p}{(}integrand1\PY{p}{,} lower \PY{o}{=} k\PY{p}{,} upper \PY{o}{=} intersection\PY{p}{,} subdivisions \PY{o}{=} \PY{l+m}{200L}\PY{p}{)}
+          beta1 \PY{o}{=} a\PY{o}{\PYZdl{}}value\PY{o}{+}b\PY{o}{\PYZdl{}}value
+          
+          beta1
+\end{Verbatim}
+
+
+    0.936593059663156
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}119}]:} \PY{c+c1}{\PYZsh{}PROBLEM 3(D)(2)}
+          
+          p3\PYZus{}zalpha\PYZus{}partd2 \PY{o}{=} qnorm\PY{p}{(}\PY{l+m}{0.02}\PY{p}{,}mean\PY{o}{=}\PY{l+m}{0}\PY{p}{,}sd\PY{o}{=}\PY{l+m}{1}\PY{p}{)}
+          p3\PYZus{}k\PYZus{}partd2 \PY{o}{=} \PY{l+m}{\PYZhy{}0.30}\PY{o}{+}p3\PYZus{}zalpha\PYZus{}partd\PY{o}{*}\PY{k+kp}{sqrt}\PY{p}{(}\PY{p}{(}\PY{l+m}{2.4}\PY{o}{\PYZca{}}\PY{l+m}{2}\PY{o}{/}\PY{l+m}{400}\PY{p}{)}\PY{o}{+}\PY{p}{(}\PY{l+m}{2.5}\PY{o}{\PYZca{}}\PY{l+m}{2}\PY{o}{/}\PY{l+m}{500}\PY{p}{)}\PY{p}{)}
+          p3\PYZus{}K\PYZus{}partd2 \PY{o}{=} \PY{p}{(}p3\PYZus{}k\PYZus{}partd\PY{o}{\PYZhy{}}\PY{p}{(}\PY{l+m}{\PYZhy{}0.31}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{k+kp}{sqrt}\PY{p}{(}\PY{p}{(}\PY{l+m}{2.4}\PY{o}{\PYZca{}}\PY{l+m}{2}\PY{o}{/}\PY{l+m}{400}\PY{p}{)}\PY{o}{+}\PY{p}{(}\PY{l+m}{2.5}\PY{o}{\PYZca{}}\PY{l+m}{2}\PY{o}{/}\PY{l+m}{500}\PY{p}{)}\PY{p}{)}
+          P3\PYZus{}beta\PYZus{}partd2 \PY{o}{=} \PY{l+m}{1}\PY{o}{\PYZhy{}}pnorm\PY{p}{(}p3\PYZus{}K\PYZus{}partd2\PY{p}{,} mean \PY{o}{=} \PY{l+m}{0}\PY{p}{,} sd \PY{o}{=} \PY{l+m}{1}\PY{p}{,} lower.tail \PY{o}{=} \PY{k+kc}{TRUE}\PY{p}{,} log.p \PY{o}{=} \PY{k+kc}{FALSE}\PY{p}{)}
+          
+          sigma \PY{o}{=} \PY{k+kp}{sqrt}\PY{p}{(}\PY{p}{(}\PY{l+m}{2.4}\PY{o}{\PYZca{}}\PY{l+m}{2}\PY{o}{/}\PY{l+m}{400}\PY{p}{)}\PY{o}{+}\PY{p}{(}\PY{l+m}{2.5}\PY{o}{\PYZca{}}\PY{l+m}{2}\PY{o}{/}\PY{l+m}{500}\PY{p}{)}\PY{p}{)}
+          intersection1 \PY{o}{=} \PY{l+m}{\PYZhy{}0.305}
+          k \PY{o}{=} p3\PYZus{}k\PYZus{}partd1
+          integrand00 \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kr}{function}\PY{p}{(}x\PY{p}{)} \PY{p}{\PYZob{}}\PY{p}{(}\PY{l+m}{1}\PY{o}{/}\PY{p}{(}sigma\PY{o}{*}\PY{k+kp}{sqrt}\PY{p}{(}\PY{l+m}{2}\PY{o}{*}\PY{k+kc}{pi}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{k+kp}{exp}\PY{p}{(}\PY{l+m}{\PYZhy{}1}\PY{o}{/}\PY{l+m}{2}\PY{o}{*}\PY{p}{(}\PY{p}{(}x\PY{l+m}{+0.3}\PY{p}{)}\PY{o}{/}sigma\PY{p}{)}\PY{o}{\PYZca{}}\PY{l+m}{2}\PY{p}{)}\PY{p}{\PYZcb{}}
+          integrand11 \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kr}{function}\PY{p}{(}x\PY{p}{)} \PY{p}{\PYZob{}}\PY{p}{(}\PY{l+m}{1}\PY{o}{/}\PY{p}{(}sigma\PY{o}{*}\PY{k+kp}{sqrt}\PY{p}{(}\PY{l+m}{2}\PY{o}{*}\PY{k+kc}{pi}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{k+kp}{exp}\PY{p}{(}\PY{l+m}{\PYZhy{}1}\PY{o}{/}\PY{l+m}{2}\PY{o}{*}\PY{p}{(}\PY{p}{(}x\PY{l+m}{+0.31}\PY{p}{)}\PY{o}{/}sigma\PY{p}{)}\PY{o}{\PYZca{}}\PY{l+m}{2}\PY{p}{)}\PY{p}{\PYZcb{}}
+          
+          a1\PY{o}{=}integrate\PY{p}{(}integrand00\PY{p}{,} lower \PY{o}{=} k\PY{p}{,} upper \PY{o}{=} intersection1\PY{p}{,} subdivisions \PY{o}{=} \PY{l+m}{200L}\PY{p}{)}
+          b1\PY{o}{=}integrate\PY{p}{(}integrand11\PY{p}{,} lower \PY{o}{=} intersection1\PY{p}{,} upper \PY{o}{=} \PY{k+kc}{Inf}\PY{p}{,} subdivisions \PY{o}{=} \PY{l+m}{200L}\PY{p}{)}
+          beta2 \PY{o}{=} a1\PY{o}{\PYZdl{}}value\PY{o}{+}b1\PY{o}{\PYZdl{}}value
+          
+          beta2
+\end{Verbatim}
+
+
+    0.955679826991673
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}112}]:} \PY{c+c1}{\PYZsh{} PROBLEM 4}
+          
+          vector1 \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kt}{c}\PY{p}{(}\PY{l+m}{45}\PY{p}{,}\PY{l+m}{52}\PY{p}{,}\PY{l+m}{60}\PY{p}{)}
+          vector2 \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kt}{c}\PY{p}{(}\PY{l+m}{42}\PY{p}{,}\PY{l+m}{55}\PY{p}{,}\PY{l+m}{43}\PY{p}{)}
+          vector3 \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kt}{c}\PY{p}{(}\PY{l+m}{15}\PY{p}{,}\PY{l+m}{28}\PY{p}{,}\PY{l+m}{25}\PY{p}{)}
+          
+          column.names \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{1\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{2\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{3+\PYZdq{}}\PY{p}{)}
+          row.names \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Poor\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{Adequate\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{Good\PYZdq{}}\PY{p}{)}
+          
+          p4\PYZus{}array \PY{o}{=} \PY{k+kt}{array}\PY{p}{(}\PY{k+kt}{c}\PY{p}{(}vector1\PY{p}{,}vector2\PY{p}{,}vector3\PY{p}{)}\PY{p}{,} \PY{k+kt}{c}\PY{p}{(}\PY{l+m}{3}\PY{p}{,}\PY{l+m}{3}\PY{p}{)}\PY{p}{,}dimnames \PY{o}{=} \PY{k+kt}{list}\PY{p}{(}\PY{k+kp}{row.names}\PY{p}{,}column.names\PY{p}{)}\PY{p}{)}
+          
+          e \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kr}{function}\PY{p}{(}i\PY{p}{,}j\PY{p}{,}\PY{k+kt}{array}\PY{p}{)} \PY{p}{\PYZob{}}
+              Fidot \PY{o}{=} \PY{k+kp}{sum}\PY{p}{(}\PY{k+kt}{array}\PY{p}{[}i\PY{p}{,}\PY{p}{]}\PY{p}{)}
+              Fjdot \PY{o}{=} \PY{k+kp}{sum}\PY{p}{(}\PY{k+kt}{array}\PY{p}{[}\PY{p}{,}j\PY{p}{]}\PY{p}{)}
+              \PY{n+nb+bp}{F} \PY{o}{=} \PY{k+kp}{sum}\PY{p}{(}\PY{k+kt}{array}\PY{p}{)}
+              \PY{k+kr}{return}\PY{p}{(}Fidot\PY{o}{*}Fjdot\PY{o}{/}\PY{n+nb+bp}{F}\PY{p}{)}
+          \PY{p}{\PYZcb{}}
+          
+          p4\PYZus{}chiSquared\PYZus{}testStat \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kr}{function}\PY{p}{(}array1\PY{p}{)}\PY{p}{\PYZob{}}
+              rows \PY{o}{=} \PY{k+kp}{dim}\PY{p}{(}array1\PY{p}{)}\PY{p}{[}\PY{l+m}{1}\PY{p}{]}
+              cols \PY{o}{=} \PY{k+kp}{dim}\PY{p}{(}array1\PY{p}{)}\PY{p}{[}\PY{l+m}{2}\PY{p}{]}
+              sum \PY{o}{=} \PY{l+m}{0}
+              \PY{k+kr}{for}\PY{p}{(}i \PY{k+kr}{in} \PY{l+m}{1}\PY{o}{:}rows\PY{p}{)}\PY{p}{\PYZob{}}
+                  \PY{k+kr}{for}\PY{p}{(}j \PY{k+kr}{in} \PY{l+m}{1}\PY{o}{:}cols\PY{p}{)}\PY{p}{\PYZob{}}
+                      term \PY{o}{=} \PY{p}{(}\PY{p}{(}array1\PY{p}{[}i\PY{p}{,}j\PY{p}{]}\PY{o}{\PYZhy{}}e\PY{p}{(}i\PY{p}{,}j\PY{p}{,}array1\PY{p}{)}\PY{p}{)}\PY{o}{\PYZca{}}\PY{l+m}{2}\PY{p}{)}\PY{o}{/}\PY{p}{(}e\PY{p}{(}i\PY{p}{,}j\PY{p}{,}array1\PY{p}{)}\PY{p}{)}
+                      sum \PY{o}{=} sum \PY{o}{+} term
+                  \PY{p}{\PYZcb{}}
+              \PY{p}{\PYZcb{}}
+              \PY{k+kr}{return}\PY{p}{(}\PY{k+kp}{sum}\PY{p}{)}
+          \PY{p}{\PYZcb{}}
+          
+          p4\PYZus{}chiSquared\PYZus{}testStat \PY{o}{=} p4\PYZus{}chiSquared\PYZus{}testStat\PY{p}{(}p4\PYZus{}array\PY{p}{)}
+          
+          \PY{k+kp}{cat}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Question 4: \PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZbs{}n\PYZdq{}}\PY{p}{)}
+          \PY{k+kp}{cat}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Chi\PYZhy{}squared test stat: \PYZsq{}}\PY{p}{,}p4\PYZus{}chiSquared\PYZus{}testStat\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZbs{}n\PYZdq{}}\PY{p}{)}
+          \PY{k+kp}{cat}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Critical region bound: \PYZsq{}}\PY{p}{,}qchisq\PY{p}{(}\PY{l+m}{1}\PY{l+m}{\PYZhy{}0.05}\PY{p}{,} df\PY{o}{=}\PY{l+m}{3}\PY{l+m}{+3}\PY{l+m}{\PYZhy{}2}\PY{p}{)}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZbs{}n\PYZdq{}}\PY{p}{)}
+          \PY{k+kp}{cat}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Conclusion is that we fail to reject the null hypothesis because our test statistic is less that our critical region bound\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZbs{}n\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Question 4:  
+Chi-squared test stat:  3.497039 
+Critical region bound:  9.487729 
+Conclusion is that we fail to reject the null hypothesis because our test statistic is less that our critical region bound 
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}113}]:} \PY{c+c1}{\PYZsh{} PROBLEM 5}
+          \PY{k+kn}{library}\PY{p}{(}tidyverse\PY{p}{)}
+          
+          poisson\PYZus{}pdf \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kr}{function}\PY{p}{(}rate\PY{p}{,}calls\PY{p}{)} \PY{p}{\PYZob{}}
+              poisson\PYZus{}pdf \PY{o}{=} \PY{p}{(}rate\PY{o}{\PYZca{}}calls \PY{o}{*} \PY{k+kp}{exp}\PY{p}{(}\PY{l+m}{\PYZhy{}1}\PY{o}{*}rate\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{k+kp}{factorial}\PY{p}{(}calls\PY{p}{)}
+              \PY{k+kr}{return}\PY{p}{(}poisson\PYZus{}pdf\PY{p}{)}
+          \PY{p}{\PYZcb{}}
+          
+          array1 \PY{o}{=} \PY{k+kt}{c}\PY{p}{(}\PY{l+m}{0}\PY{p}{,}\PY{l+m}{1}\PY{p}{,}\PY{l+m}{2}\PY{p}{,}\PY{l+m}{3}\PY{p}{,}\PY{l+m}{4}\PY{p}{,}\PY{l+m}{5}\PY{p}{,}\PY{l+m}{6}\PY{p}{,}\PY{l+m}{7}\PY{p}{,}\PY{l+m}{8}\PY{p}{)}
+          array2 \PY{o}{=} \PY{k+kt}{c}\PY{p}{(}\PY{l+m}{28}\PY{p}{,}\PY{l+m}{52}\PY{p}{,}\PY{l+m}{60}\PY{p}{,}\PY{l+m}{70}\PY{p}{,}\PY{l+m}{50}\PY{p}{,}\PY{l+m}{45}\PY{p}{,}\PY{l+m}{32}\PY{p}{,}\PY{l+m}{18}\PY{p}{,}\PY{l+m}{5}\PY{p}{)}
+          
+          p4\PYZus{}array \PY{o}{=} \PY{k+kt}{array}\PY{p}{(}\PY{k+kt}{c}\PY{p}{(}array1\PY{p}{,}array2\PY{p}{)}\PY{p}{,} \PY{k+kt}{c}\PY{p}{(}\PY{l+m}{9}\PY{p}{,}\PY{l+m}{2}\PY{p}{)}\PY{p}{)}
+          
+          
+          \PY{k+kt}{data\PYZus{}frame} \PY{o}{=} \PY{k+kt}{data.frame}\PY{p}{(}p4\PYZus{}array\PY{p}{)}
+          
+          \PY{k+kt}{data\PYZus{}frame} \PY{o}{=} \PY{k+kt}{data\PYZus{}frame} \PY{o}{\PYZpc{}\PYZgt{}\PYZpc{}} mutate\PY{p}{(}\PY{l+s+sb}{`Probability`} \PY{o}{=} poisson\PYZus{}pdf\PY{p}{(}\PY{l+m}{3.24}\PY{p}{,}\PY{l+s+sb}{`X1`}\PY{p}{)}\PY{p}{,} \PY{l+s+sb}{`Expected Freq`} \PY{o}{=} \PY{k+kp}{sum}\PY{p}{(}\PY{l+s+sb}{`X2`}\PY{p}{)}\PY{o}{*}\PY{l+s+sb}{`Probability`}\PY{p}{)}
+          
+          p4\PYZus{}chiSquared\PYZus{}testStat \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kr}{function}\PY{p}{(}df\PY{p}{)}\PY{p}{\PYZob{}}
+              k \PY{o}{=} \PY{k+kp}{dim}\PY{p}{(}df\PY{p}{)}\PY{p}{[}\PY{l+m}{1}\PY{p}{]}
+              sum \PY{o}{=} \PY{l+m}{0}
+              \PY{k+kr}{for}\PY{p}{(}i \PY{k+kr}{in} \PY{l+m}{1}\PY{o}{:}k\PY{p}{)}\PY{p}{\PYZob{}}
+                  value \PY{o}{=} \PY{p}{(}\PY{p}{(}\PY{k+kt}{data\PYZus{}frame}\PY{p}{[}i\PY{p}{,}\PY{l+m}{2}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{k+kt}{data\PYZus{}frame}\PY{p}{[}i\PY{p}{,}\PY{l+m}{4}\PY{p}{]}\PY{p}{)}\PY{o}{\PYZca{}}\PY{l+m}{2}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{k+kt}{data\PYZus{}frame}\PY{p}{[}i\PY{p}{,}\PY{l+m}{4}\PY{p}{]}\PY{p}{)}
+                  sum \PY{o}{=} sum \PY{o}{+} value
+              \PY{p}{\PYZcb{}}
+              \PY{k+kr}{return}\PY{p}{(}\PY{k+kp}{sum}\PY{p}{)}
+          \PY{p}{\PYZcb{}}
+          
+          \PY{k+kp}{cat}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Question 5: \PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZbs{}n\PYZdq{}}\PY{p}{)}
+          \PY{k+kp}{cat}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Chi\PYZhy{}squared test stat: \PYZsq{}}\PY{p}{,}p4\PYZus{}chiSquared\PYZus{}testStat\PY{p}{(}\PY{k+kt}{data\PYZus{}frame}\PY{p}{)}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZbs{}n\PYZdq{}}\PY{p}{)}
+          \PY{k+kp}{cat}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Critical region bound: \PYZsq{}}\PY{p}{,}qchisq\PY{p}{(}\PY{l+m}{1}\PY{l+m}{\PYZhy{}0.05}\PY{p}{,} df\PY{o}{=}\PY{l+m}{8}\PY{l+m}{\PYZhy{}1}\PY{l+m}{\PYZhy{}1}\PY{p}{)}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZbs{}n\PYZdq{}}\PY{p}{)}
+          \PY{k+kp}{cat}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Conclusion is that we reject the null hypothesis because our test score is greater then our critical region bound\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZbs{}n\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Question 5:  
+Chi-squared test stat:  31.41491 
+Critical region bound:  12.59159 
+Conclusion is that we reject the null hypothesis because our test score is greater then our critical region bound 
+
+    \end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
